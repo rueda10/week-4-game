@@ -1,3 +1,8 @@
+@font-face {
+    font-family: StarJedi;
+    src: url("../fonts/Starjedi.ttf") format("truetype");
+}
+
 .container {
   text-align: center;
   font-size: 24pt;
@@ -6,6 +11,31 @@
 
 img {
   cursor: pointer;
+}
+
+.jumbotron {
+  font-family: StarJedi;
+  font-size: 68pt;
+  color: white;
+  background-color: black;
+}
+
+#choose-character-label {
+  font-family: StarJedi;
+}
+
+.caption {
+  text-align: left;
+  font-size: 14pt;
+  border: thin solid black;
+}
+
+.caption div {
+  padding-left: 10px;
+}
+
+.caption .title {
+  font-weight: bold;
 }
 
 .green {
@@ -23,4 +53,32 @@ img {
 
 .locked {
   pointer-events: none;
+}
+
+#versus .row:first-child {
+  /*font-family: StarJedi;*/
+  padding-top: 50px;
+  font-size: 90pt;
+}
+
+#attack-button {
+  font-size: 24pt;
+  cursor: pointer;
+}
+
+#versus-area {
+  overflow: hidden;
+}
+
+#versus-area [class*="col-"] {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+
+.content {
+  margin-bottom: 30px;
+}
+
+.hidden {
+  display: none;
 }

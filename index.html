@@ -10,15 +10,40 @@
 </head>
 <body>
   <div class="container">
-    <span id="choose-character-label">Choose your character</span>
+    <div class="jumbotron">
+      Star Wars RPG
+    </div>
+  </div>
+  <div class="container">
     <div class="row" id="choose-character">
 
     </div>
+
+      <span id="choose-character-label">Choose your character</span>
   </div>
 
-  <div class="container">
-    <div class="row" id="enemy-characters">
+  <div class="container content">
+    <div class="row" id="versus-area">
+      <div class="col-xs-12 col-sm-4 thumbnail hidden" id="chosen-character">
 
+      </div>
+      <div class="col-xs-12 col-sm-4 hidden" id="versus">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>VS</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-xs-12">
+            <div class="btn btn-success locked" id="attack-button">
+                Attack >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 thumbnail hidden" id="enemy-character">
+
+      </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

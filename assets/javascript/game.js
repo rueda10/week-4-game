@@ -1,12 +1,11 @@
 class GameCharacter {
-  constructor(id, healthPoints, attackPoints, counterAttackPoints, image) {
+  constructor(name, id, healthPoints, attackPoints, counterAttackPoints, image) {
+    this.name = name;
     this.id = id;
     this.healthPoints = healthPoints;
     this.attackPoints = attackPoints;
     this.counterAttackPoints = counterAttackPoints;
     this.image = image;
-    this.isMainCharacter = false;
-    this.isEnemyCharacter = false;
   }
 
   incrementAttackPower() {
@@ -26,12 +25,17 @@ var game = {
   characters: [],
   chosenCharacter: undefined,
   chosenEnemy: undefined,
+  attack: 0,
 
   initGame: function() {
-    this.lukeSkywalker = new GameCharacter("Luke", 140, 20, 40, "./assets/images/luke.jpg");
-    this.obiWanKenobi = new GameCharacter("Obi-Wan", 120, 20, 40, "./assets/images/obi-wan.jpg");
-    this.darthVader = new GameCharacter("Vader", 150, 20, 40, "./assets/images/darth-vader.jpg");
-    this.darthSidious = new GameCharacter("Sidious", 180, 20, 40, "./assets/images/darth-sidious.jpg");
+    this.lukeSkywalker = new GameCharacter("Luke Skywalker", "luke", 140, 6, 5, "./assets/images/luke.jpg");
+    this.obiWanKenobi = new GameCharacter("Obi-Wan Kenobi", "obi-wan", 120, 12, 8, "./assets/images/obi-wan.jpg");
+    this.darthVader = new GameCharacter("Darth Vader", "vader", 150, 18, 12, "./assets/images/darth-vader.jpg");
+    this.darthSidious = new GameCharacter("Darth Sidious", "sidious", 180, 22, 25, "./assets/images/darth-sidious.jpg");
+    characters = [];
+    chosenCharacter = undefined;
+    chosenEnemy = undefined;
+    attack = 0;
     this.characters.push(this.lukeSkywalker);
     this.characters.push(this.obiWanKenobi);
     this.characters.push(this.darthVader);
@@ -41,11 +45,11 @@ var game = {
   populateChooseCharacterArea: function() {
     // Iterate through characters and create divs to display
     $.each(this.characters, function(i, character) {
-      var characterElement = $("<div id=" + character.id.toLowerCase() + ">");
+      var characterElement = $("<div id=" + character.id + ">");
       var imgElement = $("<img>");
       var captionElement = $('<div class="caption">');
-      var characterNameElement = $('<span class="character-name">');
-      var characterHPElement = $('<p>');
+      var characterNameElement = $("<div>");
+      var characterHPElement = $('<div>');
 
       characterElement.addClass("col-xs-12 col-sm-3 thumbnail");
 
@@ -53,10 +57,11 @@ var game = {
       imgElement.addClass("green");
       imgElement.appendTo(characterElement);
 
-      characterNameElement.html(character.id);
-      characterNameElement.appendTo(characterElement);
-      characterHPElement.html(character.healthPoints);
-      characterHPElement.appendTo(characterElement);
+      characterNameElement.html('<span class="title">Name:</span> ' + character.name);
+      characterNameElement.appendTo(captionElement);
+      characterHPElement.html('<span class="title">HP:</span> ' + character.healthPoints);
+      characterHPElement.appendTo(captionElement);
+      captionElement.appendTo(characterElement);
 
       $("#choose-character").append(characterElement);
 
@@ -64,7 +69,7 @@ var game = {
       characterElement.on("click", function() {
         // get character from div id
         var characterSelected = game.getCharacterWithId(this.attributes.id.value);
-        var targetDiv = "#" + characterSelected.id.toLowerCase();
+        var targetDiv = "#" + characterSelected.id;
         var targetImg = targetDiv + " > img";
 
         if (game.chosenCharacter === undefined) {
@@ -76,11 +81,13 @@ var game = {
 
           $.each(game.characters, function(i, character) {
             if (character.id != game.chosenCharacter.id) {
-              targetImg = "#" + character.id.toLowerCase() + " > img";
+              targetImg = "#" + character.id + " > img";
               $(targetImg).toggleClass("green");
               $(targetImg).toggleClass("red");
             }
           });
+
+          game.displayCharacter();
         } else if (game.chosenEnemy === undefined) {
           // choose enemy
           game.chosenEnemy = characterSelected;
@@ -92,28 +99,78 @@ var game = {
           $.each(game.characters, function(i, character) {
             if (character.id != game.chosenCharacter.id &&
                 character.id != game.chosenEnemy.id) {
-              targetDiv = "#" + character.id.toLowerCase();
+              targetDiv = "#" + character.id;
               targetImg = targetDiv + " > img";
               $(targetDiv).toggleClass("locked");
               $(targetDiv).toggleClass("grayed-out");
               $(targetImg).toggleClass("red");
             }
           });
-        }
 
-        game.populateVersusArea();
+          game.displayEnemy();
+        }
       });
     });
   },
 
-  populateVersusArea: function() {
-    
+  displayCharacter: function() {
+    var chosenCharacterElement = $("#chosen-character");
+    var imgElement = $("<img>");
+    var captionElement = $('<div class="caption">');
+    var characterNameElement = $("<div>");
+    var characterHPElement = $("<div>");
+
+    imgElement.attr('src', this.chosenCharacter.image);
+    imgElement.addClass("green");
+    imgElement.appendTo(chosenCharacterElement);
+
+    characterNameElement.html('<span class="title">Name:</span> ' + this.chosenCharacter.name);
+    characterNameElement.appendTo(captionElement);
+    characterHPElement.html('<span class="title">HP:</span> <span id="character-hp">' + this.chosenCharacter.healthPoints + "</span>");
+    characterHPElement.appendTo(captionElement);
+    captionElement.appendTo(chosenCharacterElement);
+
+    chosenCharacterElement.toggleClass("hidden");
+  },
+
+  displayEnemy: function() {
+    var enemyCharacterElement = $("#enemy-character");
+    var versusElement = $("#versus");
+    var imgElement = $("<img>");
+    var captionElement = $('<div class="caption">');
+    var characterNameElement = $("<div>");
+    var characterHPElement = $("<div>");
+    var attackButton = $("#attack-button");
+
+    imgElement.attr('src', this.chosenEnemy.image);
+    imgElement.addClass("red");
+    imgElement.appendTo(enemyCharacterElement);
+
+    characterNameElement.html('<span class="title">Name:</span> ' + this.chosenEnemy.name);
+    characterNameElement.appendTo(captionElement);
+    characterHPElement.html('<span class="title">HP:</span> <span id="enemy-hp">' + this.chosenEnemy.healthPoints + "</span>");
+    characterHPElement.appendTo(captionElement);
+    captionElement.appendTo(enemyCharacterElement);
+
+    versusElement.toggleClass("hidden");
+    enemyCharacterElement.toggleClass("hidden");
+    attackButton.toggleClass("locked");
+    attackButton.on("click", function() {
+      console.log("here");
+      game.attack += game.chosenCharacter.attackPoints;
+      game.chosenCharacter.healthPoints -= game.chosenEnemy.counterAttackPoints;
+      var characterHP = $("#character-hp");
+      characterHP.html(game.chosenCharacter.healthPoints);
+      game.chosenEnemy.healthPoints -= game.attack;
+      var enemyHP = $("#enemy-hp");
+      enemyHP.html(game.chosenEnemy.healthPoints);
+    });
   },
 
   getCharacterWithId: function(characterId) {
     var characterWithId = undefined;
     $.each(game.characters, function(i, character) {
-      if (character.id.toLowerCase() === characterId) {
+      if (character.id === characterId) {
         characterWithId = character;
         return false;
       }
