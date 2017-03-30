@@ -1,0 +1,26 @@
+.container {
+  text-align: center;
+  font-size: 24pt;
+  margin-top: 20px;
+}
+
+img {
+  cursor: pointer;
+}
+
+.green {
+  border: 5px solid green !important;
+}
+
+.red {
+  border: 5px solid red !important;
+}
+
+.grayed-out {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+
+.locked {
+  pointer-events: none;
+}
