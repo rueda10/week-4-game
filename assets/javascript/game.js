@@ -32,10 +32,6 @@ var game = {
     this.obiWanKenobi = new GameCharacter("Obi-Wan Kenobi", "obi-wan", 120, 12, 8, "./assets/images/obi-wan.jpg");
     this.darthVader = new GameCharacter("Darth Vader", "vader", 150, 18, 12, "./assets/images/darth-vader.jpg");
     this.darthSidious = new GameCharacter("Darth Sidious", "sidious", 180, 22, 25, "./assets/images/darth-sidious.jpg");
-    characters = [];
-    chosenCharacter = undefined;
-    chosenEnemy = undefined;
-    attack = 0;
     this.characters.push(this.lukeSkywalker);
     this.characters.push(this.obiWanKenobi);
     this.characters.push(this.darthVader);
@@ -135,12 +131,10 @@ var game = {
 
   displayEnemy: function() {
     var enemyCharacterElement = $("#enemy-character");
-    var versusElement = $("#versus");
     var imgElement = $("<img>");
     var captionElement = $('<div class="caption">');
     var characterNameElement = $("<div>");
     var characterHPElement = $("<div>");
-    var attackButton = $("#attack-button");
 
     imgElement.attr('src', this.chosenEnemy.image);
     imgElement.addClass("red");
@@ -152,19 +146,17 @@ var game = {
     characterHPElement.appendTo(captionElement);
     captionElement.appendTo(enemyCharacterElement);
 
-    versusElement.toggleClass("hidden");
     enemyCharacterElement.toggleClass("hidden");
-    attackButton.toggleClass("locked");
+    $("#versus").toggleClass("hidden");
+    $("#attack-button").toggleClass("locked");
 
-    attackButton.on("click", function() {
+    $("#attack-button").on("click", function() {
       console.log("here");
       game.attack += game.chosenCharacter.attackPoints;
       game.chosenCharacter.healthPoints -= game.chosenEnemy.counterAttackPoints;
-      var characterHP = $("#character-hp");
-      characterHP.html(game.chosenCharacter.healthPoints);
       game.chosenEnemy.healthPoints -= game.attack;
-      var enemyHP = $("#enemy-hp");
-      enemyHP.html(game.chosenEnemy.healthPoints);
+      $("#character-hp").html(game.chosenCharacter.healthPoints);
+      $("#enemy-hp").html(game.chosenEnemy.healthPoints);
     });
   },
 
