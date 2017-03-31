@@ -155,6 +155,7 @@ var game = {
     versusElement.toggleClass("hidden");
     enemyCharacterElement.toggleClass("hidden");
     attackButton.toggleClass("locked");
+
     attackButton.on("click", function() {
       console.log("here");
       game.attack += game.chosenCharacter.attackPoints;
