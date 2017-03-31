@@ -3,28 +3,56 @@
     src: url("../fonts/Starjedi.ttf") format("truetype");
 }
 
+body {
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+}
+
 .container {
   text-align: center;
   font-size: 24pt;
-  margin-top: 20px;
 }
 
-img {
+.header {
+  margin-top: 10px;
+}
+
+.thumbnail {
+  border: 0 none;
+  box-shadow: none;
+}
+
+.thumbnail img {
   cursor: pointer;
 }
 
 .jumbotron {
   font-family: StarJedi;
-  font-size: 68pt;
+  font-size: 62pt;
   color: white;
   background-color: black;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 5px;
   margin-bottom: 10px;
+}
+
+.name {
+  text-align: center;
 }
 
 #choose-character-label {
   font-family: StarJedi;
+}
+
+#attack-gameplay-messages,
+#counter-attack-gameplay-messages {
+  font-size: 14pt;
+}
+
+#attack-gameplay-messages {
+  margin-top: 10px;
 }
 
 .caption {
@@ -59,13 +87,13 @@ img {
 }
 
 #versus .row:first-child {
-  padding-top: 50px;
-  font-size: 90pt;
+  padding-top: 30px;
+  font-size: 62pt;
 }
 
 #attack-button {
-  font-size: 24pt;
-  cursor: pointer;
+  /*font-size: 18pt;*/
+  /*cursor: pointer;*/
 }
 
 #versus-area {
@@ -78,9 +106,27 @@ img {
 }
 
 .content {
-  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .hidden {
   display: none;
+}
+
+.extra-div {
+  opacity: 0;
+}
+
+.col-sm-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
 }

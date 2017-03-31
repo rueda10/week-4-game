@@ -9,41 +9,49 @@
   <title>Star Wars RPG</title>
 </head>
 <body>
-  <div class="container">
+  <div class="container header">
     <div class="jumbotron">
       Star Wars RPG
     </div>
   </div>
   <div class="container">
     <div class="row" id="choose-character">
-
+      <!-- <div class="col-xs-12 col-sm-2"></div> -->
     </div>
-    <span id="choose-character-label">Choose your character</span>
+    <div id="choose-character-label">Choose your character</div>
   </div>
 
   <div class="container content">
     <div class="row" id="versus-area">
-      <div class="col-xs-12 col-sm-4 thumbnail hidden" id="chosen-character">
-
-      </div>
-      <div class="col-xs-12 col-sm-4 hidden" id="versus">
+      <div class="col-xs-12 col-sm-5ths extra-div">a</div>
+      <div class="col-xs-12 col-sm-5ths thumbnail hidden locked" id="chosen-character"></div>
+      <div class="col-xs-12 col-sm-5ths hidden" id="versus">
         <div class="row">
           <div class="col-xs-12">
             <p>VS</p>
           </div>
         </div>
         <div class="row">
+          <!-- <div class="col-xs-6">
+            <button type="button" class="btn btn-default" id="restart-button">Restart</button>
+          </div> -->
           <div class="col-xs-12">
-            <div class="btn btn-success locked" id="attack-button">
+            <button type="button" class="btn btn-default" id="restart-button">Restart</button>
+            <button type="button" class="btn btn-success" id="attack-button">Attack ></button>
+            <!-- <div class="btn btn-success locked" id="attack-button">
                 Attack >
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-4 thumbnail hidden" id="enemy-character">
-
-      </div>
+      <div class="col-xs-12 col-sm-5ths thumbnail hidden locked" id="enemy-character"></div>
+      <div class="col-xs-12 col-sm-5ths"></div>
     </div>
+  </div>
+
+  <div class="container">
+    <div id="attack-gameplay-messages"></div>
+    <div id="counter-attack-gameplay-messages"></div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
