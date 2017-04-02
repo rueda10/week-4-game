@@ -29,10 +29,10 @@ var game = {
 
   initGame: function() {;
     this.resetDOM();
-    this.lukeSkywalker = new GameCharacter("Luke Skywalker", "luke", 120, 6, 5, "./assets/images/luke.jpg");
-    this.obiWanKenobi = new GameCharacter("Obi-Wan Kenobi", "obi-wan", 140, 12, 8, "./assets/images/obi-wan.jpg");
-    this.darthVader = new GameCharacter("Darth Vader", "vader", 150, 18, 12, "./assets/images/darth-vader.jpg");
-    this.darthSidious = new GameCharacter("Darth Sidious", "sidious", 180, 22, 25, "./assets/images/darth-sidious.jpg");
+    this.lukeSkywalker = new GameCharacter("Luke Skywalker", "luke", 120, 15, 5, "./assets/images/luke.jpg");
+    this.obiWanKenobi = new GameCharacter("Obi-Wan Kenobi", "obi-wan", 140, 10, 10, "./assets/images/obi-wan.jpg");
+    this.darthVader = new GameCharacter("Darth Vader", "vader", 160, 10, 15, "./assets/images/darth-vader.jpg");
+    this.darthSidious = new GameCharacter("Darth Sidious", "sidious", 180, 5, 20, "./assets/images/darth-sidious.jpg");
     this.characters = [];
     this.chosenCharacter = undefined;
     this.chosenEnemy = undefined;
